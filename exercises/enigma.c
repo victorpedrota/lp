@@ -1,3 +1,6 @@
+/*
+   atenção pau no cu, muda o nome das variaveis e o tamanho do vetor pra nao deixar na cara
+*/
 #include <stdio.h>
 #include <string.h>
 
