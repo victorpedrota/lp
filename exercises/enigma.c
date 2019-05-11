@@ -3,8 +3,8 @@
 
 int main (void) {
 
-   char msg_cripto[10000];
-   char msg[10000];
+   char msg_cripto[100000];
+   char msg[100000];
    int tam_msg, a=0, tam_cripto, b=0, i, j;
    scanf(" %s", &msg_cripto );
    scanf(" %s", &msg );
