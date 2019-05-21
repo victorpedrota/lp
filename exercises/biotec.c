@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+  Algoritimo certo, porem precisa de otimizaço
+  possivel otimização em alocar o vetor
+  ou mudar a logica para nao calucar todas as somas
+*/
+
 int main(void){
   char *mensagem, *tmp, aux;
   int i, j, x, cadeia=1, tam, vetor[100000], soma=0, pos=1;
