@@ -13,8 +13,12 @@ int fatorial(int numero){
 
 int main(void){
   char *mensagem, *tmp, aux;
-  int i, j, possibilidades=1, k, tam, vetor[100], resp, count=0, denominador=1, numerador, soma;
-  
+  int i, j, cadeia, k, tam, vetor[100], resp, count=0,o=0, denominador=1, numerador, soma=0, soma_anterior;
+  int **matrix;
+
+  for ( i = 0; i < 100; i++) {
+    vetor[i]=0;
+  }
   //alocando o vetor temporario
   tmp = (char*)malloc(100000 * sizeof(char));
 
@@ -34,52 +38,28 @@ int main(void){
 
   //liberando o vetor temporario
   free(tmp);
+  cadeia = 1;
+  //aqui tem q ficar a soma das subcadeias
+  for  (j = 1; j < tam; j++) {
+    for(int x=1;x<tam;x++){
+      soma_anterior = soma;
+      soma = 0;
+      for (i = 0; i < cadeia; i++) {
+        soma = soma + (mensagem[x-1+i]-96);
 
-  //ordenando vetor
-  for (i = 0; i < tam; i++){
-    for (j = i + 1; j < tam; j++){
-      if (mensagem[i] < mensagem[j]){
-        aux =  mensagem[i];
-        mensagem[i] = mensagem[j];
-        mensagem[j] = aux;
       }
+
+      printf("%d\n", soma);
+
     }
+    cadeia++;
   }
 
-  //imprimindo pra teste
-  for (i = 0; i < tam; i++) {
-    printf("(%c)", mensagem[i] );
+  for(i=0;i<tam;i++){
+    printf("(%d)\n",  vetor[i]);
   }
-  printf("\n");
+  printf("%d\n", count);
 
-  //vendo quais sao repetidos
-  for (i = 0; i < tam; i++) {
-    resp=1;
-    while(mensagem[i]==mensagem[i+1]) {
-      resp++;
-      i++;
-    }
-    count++;
-    vetor[count] = resp;
-    printf("(%d)", resp);
-    printf("-%d-\n",count );
-  }
-
-  //teste
-  for (i = 1; i <= count; i++) {
-    denominador = denominador * fatorial(vetor[i]);
-  }
-  numerador = fatorial(tam);
-  possibilidades = numerador/denominador;
-
-  printf("%d\n", possibilidades);
-
-  //fazendo a soma
-  soma =0;
-  for(k=0; k < tam;k++){
-    soma = soma + (mensagem[k]-96);
-  }
-  printf("/%d/\n", soma);
 
   free(mensagem);
 }
