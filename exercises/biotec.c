@@ -45,11 +45,30 @@ int main(void){
     }
     cadeia++;
   }
-
+  /*
   for(i=0;i<pos;i++){
     printf("(%d)\n",  vetor[i]);
   }
-  printf("%d\n", count);
+  */
+  for( i = 0; i < tam; i++ )
+    {
+        for( j = i + 1; j < tam; )
+        {
+            if( vetor[j] == vetor[i] )
+            {
+                for( k = j; k < tam; k++ )
+                    vetor[k] = vetor[k + 1];
+
+                tam--;
+            }
+            else
+            {
+                j++;
+            }
+        }
+    }
+
+  printf("%d\n",  strlen(vetor));
 
 
   free(mensagem);
