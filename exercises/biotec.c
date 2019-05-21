@@ -4,12 +4,8 @@
 
 int main(void){
   char *mensagem, *tmp, aux;
-  int i, j, cadeia, k, tam, vetor[100], resp, count=0, soma=0, pos=0;
-  int **matrix;
+  int i, j, x, cadeia=1, tam, vetor[100000], soma=0, pos=1;
 
-  for ( i = 0; i < 100; i++) {
-    vetor[i]=0;
-  }
   //alocando o vetor temporario
   tmp = (char*)malloc(100000 * sizeof(char));
 
@@ -23,53 +19,46 @@ int main(void){
   mensagem = (char*)malloc(tam * sizeof(char));
 
   //copiando o vetor
-  for(k = 0 ;k < tam; k++){
-    mensagem[k] = tmp[k];
+  for(i = 0 ;i < tam; i++){
+    mensagem[i] = tmp[i];
   }
 
   //liberando o vetor temporario
   free(tmp);
-  cadeia = 1;
+
   //aqui tem q ficar a soma das subcadeias
-  for  (j = 1; j < tam; j++) {
-    for(int x=1;x<=tam;x++){
+  for(i = 1; i < tam; i++){
+    for(j = 1;j <= tam; j++){
       soma = 0;
-      if(x+cadeia-1<=tam){
-        for (i = 0; i < cadeia; i++) {
-            soma = soma + (mensagem[x-1+i]-96);
-          }
-        printf("%d\n", soma);
+      if(j+cadeia-1 <= tam){
+        for (x = 0; x < cadeia; x++) {
+            soma += (mensagem[j-1+x]-96);
+        }
         vetor[pos] = soma;
         pos++;
       }
     }
     cadeia++;
   }
-  /*
-  for(i=0;i<pos;i++){
-    printf("(%d)\n",  vetor[i]);
-  }
-  */
-  for( i = 0; i < tam; i++ )
-    {
-        for( j = i + 1; j < tam; )
-        {
-            if( vetor[j] == vetor[i] )
-            {
-                for( k = j; k < tam; k++ )
-                    vetor[k] = vetor[k + 1];
 
-                tam--;
-            }
-            else
-            {
-                j++;
-            }
+  //retorna o numero de somas somas diferentes
+  for(i = 0; i < pos; i++){
+    for(j = i + 1; j < pos;){
+      if(vetor[j] == vetor[i]){
+        for(x = j; x < pos; x++){
+        vetor[x] = vetor[x + 1];
         }
+        pos--;
+      }
+      else{
+        j++;
+      }
     }
+  }
 
-  printf("%d\n",  strlen(vetor));
+  //imprimindo o resultado
+  printf("%d\n", pos);
 
-
+  //liberando o vetor
   free(mensagem);
 }
