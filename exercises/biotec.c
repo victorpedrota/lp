@@ -2,18 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-//função para calcular fatorial
-int fatorial(int numero){
-   if(numero > 1){
-    return numero * fatorial(numero - 1);
-  }else{
-    return 1;
-  }
-}
-
 int main(void){
   char *mensagem, *tmp, aux;
-  int i, j, cadeia, k, tam, vetor[100], resp, count=0,o=0, denominador=1, numerador, soma=0, soma_anterior;
+  int i, j, cadeia, k, tam, vetor[100], resp, count=0, soma=0, pos=0;
   int **matrix;
 
   for ( i = 0; i < 100; i++) {
@@ -41,21 +32,21 @@ int main(void){
   cadeia = 1;
   //aqui tem q ficar a soma das subcadeias
   for  (j = 1; j < tam; j++) {
-    for(int x=1;x<tam;x++){
-      soma_anterior = soma;
+    for(int x=1;x<=tam;x++){
       soma = 0;
-      for (i = 0; i < cadeia; i++) {
-        soma = soma + (mensagem[x-1+i]-96);
-
+      if(x+cadeia-1<=tam){
+        for (i = 0; i < cadeia; i++) {
+            soma = soma + (mensagem[x-1+i]-96);
+          }
+        printf("%d\n", soma);
+        vetor[pos] = soma;
+        pos++;
       }
-
-      printf("%d\n", soma);
-
     }
     cadeia++;
   }
 
-  for(i=0;i<tam;i++){
+  for(i=0;i<pos;i++){
     printf("(%d)\n",  vetor[i]);
   }
   printf("%d\n", count);
