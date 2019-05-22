@@ -4,16 +4,19 @@
 
 /*
   Algoritimo certo, porem precisa de otimizaço
-  possivel otimização em alocar o vetor
+  possivel otimização em alocar o vetor vetor
   ou mudar a logica para nao calucar todas as somas
 */
 
 int main(void){
   char *mensagem, *tmp, aux;
-  int i, j, x, cadeia=1, tam, vetor[100000], soma=0, pos=1;
+  int i, j, x, cadeia=1, tam, *vetor, soma=0, pos=1;
 
   //alocando o vetor temporario
   tmp = (char*)malloc(100000 * sizeof(char));
+
+  //devo ter deito bosta aqui
+  vetor = (int*)malloc(1000000 * sizeof(int));
 
   //lendo a linha s
   scanf(" %s", tmp);
