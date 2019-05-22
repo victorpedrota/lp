@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 //Este codigo é o codigo mais porco q ja fiz
-  int **Alocar_matriz_real (int m, int n){
+//função pra alocação dinamica matriz
+int **alocar_matriz (int m, int n){
     int **v;
     int i;
     if (m < 1 || n < 1) {
@@ -24,8 +26,8 @@
   }
   return (v);
 }
-
-int **Liberar_matriz_real (int m, int n, int **v){
+//função para liberar a matrix
+int **liberar_matriz (int m, int n, int **v){
   int i;
   if (v == NULL) return (NULL);
   if (m < 1 || n < 1) {
@@ -38,23 +40,32 @@ int **Liberar_matriz_real (int m, int n, int **v){
   }
 
 int main() {
+
 	int *vetor, **matrix;
-  int aux, a, num_acesas, num_lampadas,i, num_interrutores, num_lamp_inte,j,c=0,b,h=0;;
+  int i, j, a, num_acesas, num_lampadas, num_interrutores, num_lamp_inte, c=0, b, h=0;
+
+  //valores de entrada
   scanf("%d %d", &num_interrutores, &num_lampadas);
 
+  //alocando o vetor
 	if (!(vetor = (int *)malloc(num_lampadas * sizeof(int)))) {
 		printf("Não foi possível alocar o vetor\n");
 		exit(0);
 	}
 
-  matrix = Alocar_matriz_real(num_interrutores,(num_lampadas+1));
+  //alocando a matrix caso numeros sejam mt grandes
+  matrix = alocar_matriz(num_interrutores,(num_lampadas+1));
 
+  //recebendo numero lampadas acesas
   scanf("%d", &num_acesas);
+
+  //vendo quais lampadas estao acesas
   for (i = 0; i < num_acesas; i++){
     scanf("%d", &a);
     vetor[a-1] = 1;
   }
 
+  //mudando o estado das lampadas para acesas
   for (i = 0; i < num_interrutores; i++) {
     scanf("%d", &num_lamp_inte);
     matrix[i][0] = num_lamp_inte;
@@ -63,6 +74,8 @@ int main() {
       scanf("%d", &matrix[i][j+1]);
     }
   }
+
+  //vendo relacao interrutor/lampada e mudando estado da lampada
   while(h<50){
     for (i = 0; i < num_interrutores; i++) {
       b=0;
@@ -86,6 +99,7 @@ int main() {
     h++;
   }
 
+  //conferindo os casos e imprimindo as respostas
   if (b==0 && c>0) {
     printf("%d", c);
   }
@@ -96,6 +110,7 @@ int main() {
     printf("-1");
   }
 
+  //liberando os vetores apos o uso
 	free(vetor);
-  matrix = Liberar_matriz_real(num_interrutores,(num_lampadas+1), matrix);
+  matrix = liberar_matriz(num_interrutores,(num_lampadas+1), matrix);
 }

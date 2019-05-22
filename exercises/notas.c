@@ -2,6 +2,7 @@
 
 int main(int argc, char const *argv[]) {
   int *vetor , i, j, numero_participantes, vagas=0,count=0, aux=0,x=0;
+
   scanf("%d", &numero_participantes);
   scanf("%d", &vagas);
 
@@ -37,9 +38,9 @@ int main(int argc, char const *argv[]) {
         count++;
         x++;
       }
-
     }
   }
+
   printf("%d", count);
   free (vetor);
   return 0;
