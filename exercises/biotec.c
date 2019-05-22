@@ -16,7 +16,10 @@ int main(void){
   tmp = (char*)malloc(100000 * sizeof(char));
 
   //devo ter deito bosta aqui
-  vetor = (int*)malloc(1000000 * sizeof(int));
+  if (!(vetor = (int *)malloc(100000 * sizeof(int)))) {
+		printf("Não foi possível alocar o vetor\n");
+		exit(0);
+	}
 
   //lendo a linha s
   scanf(" %s", tmp);
