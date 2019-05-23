@@ -7,16 +7,34 @@
   possivel otimização em alocar o vetor vetor
   ou mudar a logica para nao calucar todas as somas
 */
+int verificar_igual(int *vetor, int pos){
+  int i,j,x;
+  for(i = 0; i < pos; i++){
+    for(j = i + 1; j < pos;){
+      if(vetor[j] == vetor[i]){
+        for(x = j; x < pos; x++){
+        vetor[x] = vetor[x + 1];
+        }
+        pos--;
+      }
+      else{
+        j++;
+      }
+    }
+  }
+  return pos;
+}
 
 int main(void){
   char *mensagem, *tmp, aux;
-  int i, j, x, cadeia=1, tam, *vetor, soma=0, pos=1;
+  int i, j, x, cadeia=1, tam, *vetor, soma=0, pos=1, teste;
+
 
   //alocando o vetor temporario
-  tmp = (char*)malloc(100000 * sizeof(char));
+  tmp = (char*)malloc(1000000 * sizeof(char));
 
   //devo ter deito bosta aqui
-  if (!(vetor = (int *)malloc(100000 * sizeof(int)))) {
+  if (!(vetor = (int *)malloc(10000000 * sizeof(int)))) {
 		printf("Não foi possível alocar o vetor\n");
 		exit(0);
 	}
@@ -39,37 +57,26 @@ int main(void){
   free(tmp);
 
   //aqui tem q ficar a soma das subcadeias
-  for(i = 1; i < tam; i++){
-    for(j = 1;j <= tam; j++){
+  for(cadeia = 1; cadeia <= tam; cadeia++){
+    for(j = 0;j <= tam-cadeia; j++){
       soma = 0;
-      if(j+cadeia-1 <= tam){
         for (x = 0; x < cadeia; x++) {
-            soma += (mensagem[j-1+x]-96);
+            soma += (mensagem[j+x]-96);
+            printf("(%c)", mensagem[j+x]);
         }
         vetor[pos] = soma;
+        teste = verificar_igual(vetor, pos);
         pos++;
-      }
+        printf("\n" );
     }
-    cadeia++;
+
   }
 
   //retorna o numero de somas somas diferentes
-  for(i = 0; i < pos; i++){
-    for(j = i + 1; j < pos;){
-      if(vetor[j] == vetor[i]){
-        for(x = j; x < pos; x++){
-        vetor[x] = vetor[x + 1];
-        }
-        pos--;
-      }
-      else{
-        j++;
-      }
-    }
-  }
+
 
   //imprimindo o resultado
-  printf("%d\n", pos);
+  printf("%d\n", teste);
 
   //liberando o vetor
   free(mensagem);
