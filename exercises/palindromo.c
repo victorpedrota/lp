@@ -9,7 +9,7 @@ int main(int argc, char const *argv[]) {
 
   gets(texto);
   tam = strlen(texto);
-  j=0;
+  
   for ( i = 0, j = 0; i < tam; i++, j++) {
         if (texto[j] == ' ') {
             j++;

@@ -62,12 +62,12 @@ int main(void){
       soma = 0;
         for (x = 0; x < cadeia; x++) {
             soma += (mensagem[j+x]-96);
-            printf("(%c)", mensagem[j+x]);
+
         }
         vetor[pos] = soma;
         teste = verificar_igual(vetor, pos);
         pos++;
-        printf("\n" );
+
     }
 
   }
